@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/biz_news_local_weather_bg_big"
+    android:orientation="vertical" >    
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp" 
+        android:paddingTop="10dp">
+
+        <TextView
+        	android:id="@+id/usename_menu"
+            android:layout_width="match_parent"
+            android:layout_height="28.0dip"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="15.0dip"
+            android:text="use_name"
+            android:textColor="@color/white"
+            android:textSize="14.0sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/exit_menu"
+        android:layout_width="match_parent"
+        android:layout_height="50.0dip"
+        android:clickable="true"
+        android:drawablePadding="1.0dip"
+        android:gravity="center_vertical"
+        android:paddingLeft="15.0dip"
+        android:paddingRight="10.0dip"
+        android:text="退出"
+        android:textColor="@color/white"
+        android:textSize="16.0sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2.0dip"
+        android:background="@drawable/biz_pc_account_line" />
+
+</LinearLayout>
