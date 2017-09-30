@@ -84,12 +84,14 @@
                 android:id="@+id/button_flush"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:text="刷卡" />
 
             <Button
                 android:id="@+id/button_fromto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:text="转账" />
 
         </LinearLayout>

@@ -1,7 +1,6 @@
 package cqx.acc.util.thread;
 
 import android.os.Handler;
-import android.os.Message;
 import cqx.acc.util.AccmycardUtils;
 import cqx.acc.util.AccusetypeUtils;
 import cqx.acc.util.CallWebService;
@@ -10,13 +9,13 @@ import cqx.acc.util.KEYUtils;
 import cqx.acc.util.ResultXML;
 import cqx.acc.util.Utils;
 import cqx.acc.util.XMLData;
+import cqx.acc.util.bean.CallServerBean;
+import cqx.acc.util.thread.intf.AbstractCallServerThread;
 
 /**
  * 登陆线程
  * */
-public class LoginThread implements Runnable{
-	private Handler mHandler;
-	private Message msg; // what: 0 success 1 error
+public class LoginThread extends AbstractCallServerThread implements Runnable {
 	private String username;
 	private String password;
 	public LoginThread(Handler _mHandler, String _username, String _password){
@@ -31,18 +30,16 @@ public class LoginThread implements Runnable{
 	 * */
 	@Override
 	public void run() {
-		if(requestLogin()){
-			this.msg.what = 0;
-		}else{
-			this.msg.what = 1;		
-		}
-		this.mHandler.sendMessage(this.msg);
+		// 调用父类的执行方法
+		exec();
 	}
 	
 	/**
 	 * 登陆请求
 	 * */
-	private boolean requestLogin(){
+	protected CallServerBean callService() {
+		// 返回的服务结果，包含服务状态和业务代码
+		CallServerBean csb = new CallServerBean();
     	try{
 	    	String soap = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.acc.cqx.com/\"><soapenv:Header/><soapenv:Body><ser:LoginCheck><message><header>"
 	    			+"<requestname>"+this.username+"</requestname>"
@@ -57,8 +54,8 @@ public class LoginThread implements Runnable{
 	    	String sUrl = Constants.loginserverURL;
 	    	CallWebService cws = new CallWebService();
 	    	String resultxml = cws.doAction(sUrl, data);
-	        if (resultxml.length()>0){
-	            // 解析返回信息
+	        if (resultxml.length()>0) {
+	        	// 解析返回信息
 	        	Utils.LogDebug("[cqx.acc.requestLogin.resultxml]"+resultxml);
 	        	ResultXML rx = new ResultXML();
 	    		StringBuffer xml = new StringBuffer();
@@ -68,26 +65,41 @@ public class LoginThread implements Runnable{
 	    		rx.rtFlag = true;
 	    		rx.bXmldata = true;
 	    		rx.xmldata = xd;
-	    		rx.setbFlag(false);		
-	    		rx.resetParent().node("Body").node("LoginCheckResponse").node("message").setParentPointer();
-	    		rx.setRowFlagInfo("response");
+	    		rx.setbFlag(false);
+	    		// 先看状态，再看返回值
+	    		rx.resetParent().node("Body").node("LoginCheckResponse").node("message").node("header").setParentPointer();
+	    		rx.setRowFlagInfo("status");
 	    		rx.First();
-	            if(rx.isEof()){// 没有结果
-	            	Utils.LogInfo("[cqx.acc.requestLogin.resultxml]no result");
-	            }else{// 有结果
-	            	String logincode = rx.getRowValue();
-	            	if(logincode.equals("1")){// 验证密码正确
-	            		// 查询分类列表
-	            		Constants.accusetypeList = AccusetypeUtils.getInstance().queryTypeListByUsername(this.username);
-	            		// 查询我的卡列表
-	            		Constants.accmycardList = AccmycardUtils.getInstance().queryCradListByUsername(this.username);
-	    	        	return true;
-	            	}
-	            }
+	    		if (rx.isEof()) { // 没有状态
+	    			Utils.LogInfo("[cqx.acc.requestLogin.resultxml]no status没有结果");
+	    		} else { // 有状态
+	    			int flag = Integer.valueOf(rx.getRowValue());
+	    			// 设置返回结果的服务状态
+	    			csb.setStatus(flag);
+	    			if (flag==0) { // 状态正常
+		    			// 查询业务结果
+						rx.resetParent().node("Body").node("LoginCheckResponse").node("message").setParentPointer();
+						rx.setRowFlagInfo("response");
+						rx.First();
+						if (rx.isEof()) { // 没有业务结果
+							Utils.LogInfo("[cqx.acc.requestLogin.resultxml]no result");
+						} else { // 有业务结果
+			            	int logincode = Integer.valueOf(rx.getRowValue());
+			            	// 设置业务结果
+			            	csb.setBusiness_code(logincode);
+			            	if (logincode==1) { // 验证密码正确
+			            		// 查询分类列表
+			            		Constants.accusetypeList = AccusetypeUtils.getInstance().queryTypeListByUsername(this.username);
+			            		// 查询我的卡列表
+			            		Constants.accmycardList = AccmycardUtils.getInstance().queryCradListByUsername(this.username);
+			            	}
+			            }
+	    			}
+	    		 }
 	        }
-    	}catch(Exception e){
+    	} catch (Exception e) {
 			Utils.LogErr(e.getMessage());
     	}
-    	return false;
+    	return csb;
 	}
 }

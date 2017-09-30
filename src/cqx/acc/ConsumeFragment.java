@@ -216,7 +216,7 @@ import cqx.acc.util.thread.ConsumeThread;
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(); 
         for(AccCountsDailyBean bean : Constants.acccountsdailyList){
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("title", bean.getAcc_type_desc()+" "+bean.getAcc_value());
+            map.put("title", bean.getAcc_type_desc()+" "+bean.getAcc_value()+" "+bean.getAcc_card_name());
             map.put("info", bean.getAcc_desc());
             map.put("datevalue", bean.getAcc_use_time());
             list.add(map);

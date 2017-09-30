@@ -37,8 +37,8 @@ public class AddThread implements Runnable{
 	/**
 	 * 保存请求
 	 * */
-	private boolean requestAdd(){
-    	try{
+	private boolean requestAdd() {
+    	try {
 	    	String soap = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.acc.cqx.com/\">"
 	    			+"<soapenv:Header/>"
 	    			+"<soapenv:Body>"
@@ -74,7 +74,7 @@ public class AddThread implements Runnable{
 	    	String sUrl = Constants.dealcountsdailyserviceURL;
 	    	CallWebService cws = new CallWebService();
 	    	String resultxml = cws.doAction(sUrl, data);
-	        if (resultxml.length()>0){
+	        if (resultxml.length()>0) {
 	            // 解析返回信息
 	        	Utils.LogDebug("[cqx.acc.requestAdd.resultxml]"+resultxml);
 	        	ResultXML rx = new ResultXML();
@@ -89,16 +89,16 @@ public class AddThread implements Runnable{
 	    		rx.resetParent().node("Body").node("insertCountsDailyResponse").node("message").setParentPointer();
 	    		rx.setRowFlagInfo("response");
 	    		rx.First();
-	            if(rx.isEof()){// 没有结果
+	            if (rx.isEof()) { // 没有结果
 	            	Utils.LogInfo("[cqx.acc.requestAdd.resultxml]no result");
-	            }else{// 有结果
+	            } else { // 有结果
 	            	String resultcode = rx.getRowValue();
-	            	if(resultcode.equals("1")){// 增加记录成功
+	            	if (resultcode.equals("1")) { // 增加记录成功
 	            		return true;
 	            	}
 	            }
 	        }
-    	}catch(Exception e){
+    	} catch (Exception e) {
 			Utils.LogErr(e.getMessage());
     	}		
 		return false;

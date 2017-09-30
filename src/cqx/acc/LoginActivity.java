@@ -34,7 +34,7 @@ public class LoginActivity extends Activity implements OnClickListener,OnChecked
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case 0:
+			case 1:
 				mDialog.cancel();
 				Toast.makeText(getApplicationContext(), "登录成功！",
 						Toast.LENGTH_SHORT).show();
@@ -53,12 +53,15 @@ public class LoginActivity extends Activity implements OnClickListener,OnChecked
 				startActivity(intent);
 				finish();
 				break;
-			case 1:
+			case 0:
 				mDialog.cancel();
-				Toast.makeText(getApplicationContext(), "用户密码错误",
+				Toast.makeText(getApplicationContext(), "用户密码错误！",
 						Toast.LENGTH_SHORT).show();
-				break;
+				break;				
 			default:
+				mDialog.cancel();
+				Toast.makeText(getApplicationContext(), "网络或服务器异常！",
+						Toast.LENGTH_SHORT).show();
 				break;
 			}
 		}

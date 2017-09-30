@@ -95,12 +95,13 @@ public class AccCountsDailyBean {
 		this.user_name = user_name;
 	}
 	public AccCountsDailyBean(int _acc_type, String _acc_type_desc,
-			String _acc_use_time, String _acc_value, String _acc_desc){
+			String _acc_use_time, String _acc_value, String _acc_desc, String _acc_card_name){
 		this.acc_type = _acc_type;
 		this.acc_type_desc = _acc_type_desc;
 		this.acc_use_time = _acc_use_time;
 		this.acc_value = _acc_value;
 		this.acc_desc = _acc_desc;
+		this.acc_card_name = _acc_card_name;
 	}
 	public static AccCountsDailyBean strToBean(ResultXML rx){
 		return new AccCountsDailyBean(
@@ -108,7 +109,8 @@ public class AccCountsDailyBean {
 				rx.getColumnsValue("acc_type_desc"),
 				rx.getColumnsValue("acc_use_time"),
 				rx.getColumnsValue("acc_value"),
-				rx.getColumnsValue("acc_desc")
+				rx.getColumnsValue("acc_desc"),
+				rx.getColumnsValue("acc_card_name")
 				);
 	}
 }
