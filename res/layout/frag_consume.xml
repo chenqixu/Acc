@@ -75,12 +75,6 @@
                 android:text="支出" />
 
             <Button
-                android:id="@+id/button_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="收入" />
-
-            <Button
                 android:id="@+id/button_flush"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,6 +88,12 @@
                 android:visibility="invisible"
                 android:text="转账" />
 
+            <Button
+                android:id="@+id/button_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="收入" />
+
         </LinearLayout>
     </TableRow>
 
@@ -105,30 +105,52 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView_out"
+            android:orientation="horizontal">
+            
+            <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:orientation="vertical">
+	
+	            <TextView
+	                android:id="@+id/textView_out"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="支出：0"
+	                android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	            <TextView
+	                android:id="@+id/textView_in"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="收入：0"
+	                android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	            <TextView
+	                android:id="@+id/textView_surplus"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="盈余：0"
+	                android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	        </LinearLayout>
+            
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="支出：0"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/textView_in"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="收入：0"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/textView_surplus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="盈余：0"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        </LinearLayout>
+                android:layout_gravity="bottom"
+                android:orientation="vertical" >
+	
+	            <TextView
+	                android:id="@+id/textView_xinyong_out"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:text="信用卡：0"
+	                android:textAppearance="?android:attr/textAppearanceLarge" />
+                
+	        </LinearLayout>
+        
+        </LinearLayout>        
     </TableRow>
 
 </TableLayout>
