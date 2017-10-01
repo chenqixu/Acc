@@ -20,6 +20,11 @@ public class Constants {
 	public static final boolean ISDEBUG = false;
 	public static final boolean ISERR = false;
 	
+	// 关键字
+	public static final String CREDIT_CARD = "信用卡";
+	public static final String STORED_VALUE_CARD = "储值卡";
+	public static final String PAY = "缴费";
+	
 	// DATE FORMAT
 	public static final String NOWDATE_FORMAT2 = "yyyy-MM";
 	public static final String NOWDATE_FORMAT3 = "yyyy-MM-dd";

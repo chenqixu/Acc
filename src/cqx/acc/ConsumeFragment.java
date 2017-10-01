@@ -34,14 +34,15 @@ import cqx.acc.util.thread.ConsumeThread;
 @SuppressLint({ "InflateParams", "HandlerLeak" }) public class ConsumeFragment extends Fragment implements OnClickListener{
 	private Button button_out = null;
 	private Button button_add = null;
-	private Button button_flush = null;
-	private Button button_fromto = null;
+//	private Button button_flush = null;
+//	private Button button_fromto = null;
 	private ProgressDialog mDialog = null;
 	private ListView listView_detail= null;
 	private TextView textView_month = null;
 	private TextView textView_in = null;
 	private TextView textView_out = null;
 	private TextView textView_surplus = null;
+	private TextView textView_xinyong_out = null;
 
     private Calendar cal = null;
     private int year = 2010,month = 1,day = 1;
@@ -61,6 +62,7 @@ import cqx.acc.util.thread.ConsumeThread;
 				textView_out.setText("支出："+listSum[1]);
 				textView_in.setText("收入："+listSum[0]);
 				textView_surplus.setText("盈余："+listSum[2]);
+				textView_xinyong_out.setText("信用卡："+listSum[3]);
 				break;
 			default:
 				break;
@@ -88,12 +90,12 @@ import cqx.acc.util.thread.ConsumeThread;
 		// 收入
 		button_add = (Button) view.findViewById(R.id.button_add);
 		button_add.setOnClickListener(this);
-		// 刷卡
-		button_flush = (Button) view.findViewById(R.id.button_flush);
-		button_flush.setOnClickListener(this);
-		// 转账
-		button_fromto = (Button) view.findViewById(R.id.button_fromto);
-		button_fromto.setOnClickListener(this);
+//		// 刷卡
+//		button_flush = (Button) view.findViewById(R.id.button_flush);
+//		button_flush.setOnClickListener(this);
+//		// 转账
+//		button_fromto = (Button) view.findViewById(R.id.button_fromto);
+//		button_fromto.setOnClickListener(this);
 		// 清单
 		listView_detail = (ListView) view.findViewById(R.id.listView_detail);
 		// 屏幕高宽
@@ -134,7 +136,8 @@ import cqx.acc.util.thread.ConsumeThread;
 		textView_out = (TextView) view.findViewById(R.id.textView_out);
 		// 盈余
 		textView_surplus = (TextView) view.findViewById(R.id.textView_surplus);
-
+		// 信用卡
+		textView_xinyong_out = (TextView) view.findViewById(R.id.textView_xinyong_out);
 		// 查询
 		query();
 		
@@ -174,12 +177,12 @@ import cqx.acc.util.thread.ConsumeThread;
 				main_act.showAdd(1);
 			}
 			break;
-		// 刷卡
-		case R.id.button_flush:
-			break;
-		// 转账
-		case R.id.button_fromto:
-			break;
+//		// 刷卡
+//		case R.id.button_flush:
+//			break;
+//		// 转账
+//		case R.id.button_fromto:
+//			break;
 		// 时间条件
 		case R.id.textView_month:
 			// 后边三个参数为显示dialog时默认的日期，月份从0开始，0-11对应1-12个月
