@@ -35,7 +35,7 @@ public class Constants {
 	// 10.0.2.2:8080
 	// 192.168.1.10:8080
 	// accfamily.duapp.com
-	public static final String urlandport = "http://accfamily.duapp.com/ProjectAccSvc/";
+	public static final String urlandport = "http://132.232.177.48:8080/ProjectAccSvc/";
 	public static final String loginserverURL = urlandport+"LoginService";
 	public static final String jsonserverURL = urlandport+"JsonService";
 	public static final String dealcountsdailyserviceURL = urlandport+"DealCountsDailyService";
