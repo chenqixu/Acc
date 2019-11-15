@@ -117,13 +117,17 @@ import cqx.acc.util.thread.ConsumeThread;
 			case 1920:
 				lvd_lp.height = 1200;
 				break;
+			case 2340:
+				lvd_lp.height = 1800;
+				break;
 			default:
 				break;
 		}
 		listView_detail.setLayoutParams(lvd_lp);
+		// 测试sdk 854x480 =600
 		// 红米2 1280x720 =800
 		// 红米note2 1920x1080 =1200
-		// 测试sdk 854x480 =600
+		// 红米note8pro 2340x1080 =1800
 		
 		// 月份
 		textView_month = (TextView) view.findViewById(R.id.textView_month);

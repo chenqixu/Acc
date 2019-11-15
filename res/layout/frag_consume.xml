@@ -52,7 +52,7 @@
         <ListView
             android:id="@+id/listView_detail"
             android:layout_width="match_parent"
-            android:layout_height="450px"
+            android:layout_height="1500px"
             android:fadeScrollbars="true"
             android:layout_span="2" >
         </ListView>
